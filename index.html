@@ -1,1 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>iPhone Infiltrated</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: black;
+      color: red;
+      font-family: monospace;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
 
+    .blinking {
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    #countdown {
+      font-size: 48px;
+      margin: 20px 0;
+    }
+
+    .fake-popup {
+      background-color: #222;
+      color: white;
+      border: 1px solid #666;
+      padding: 20px;
+      border-radius: 10px;
+      width: 80%;
+      max-width: 400px;
+      box-shadow: 0 0 20px red;
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    #reveal {
+      display: none;
+      color: white;
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .notification {
+      position: absolute;
+      top: 20px;
+      width: 90%;
+      max-width: 400px;
+      background-color: #1c1c1e;
+      color: white;
+      padding: 15px;
+      border-radius: 20px;
+      box-shadow: 0 0 10px #444;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 16px;
+      text-align: left;
+    }
+
+    .notification strong {
+      display: block;
+      margin-bottom: 5px;
+      color: #00ffcc;
+    }
+
+    #trace {
+      white-space: pre-wrap;
+      color: lime;
+      font-size: 14px;
+      width: 90%;
+      max-width: 500px;
+      height: 150px;
+      overflow: hidden;
+      border: 1px solid #0f0;
+      padding: 10px;
+      margin-top: 20px;
+      background: black;
+      box-shadow: 0 0 10px #0f0;
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="notification">
+    <strong>System Alert</strong>
+    You have been hacked by Yoshimitsu of the Wulf Clan.
+  </div>
+
+  <div class="fake-popup blinking">
+    <strong>Security Alert:</strong><br>
+    Unauthorized access detected.<br>
+    Threat level: CRITICAL.
+  </div>
+
+  <div class="fake-popup">
+    Core files are being accessed remotely.<br>
+    Breach origin: Unknown Location.<br>
+    Countdown to full lockdown:
+  </div>
+
+  <div id="countdown">60</div>
+
+  <div id="trace"></div>
+
+  <audio id="alarm" autoplay loop>
+    <source src="https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg" type="audio/ogg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <div id="reveal">
+    <h2>Simulation Complete.</h2>
+    <p>This was an educational demonstration.</p>
+    <p>But you *were* hacked... by your own curiosity.</p>
+    <p><em>– Yoshimitsu of the Wulf Clan</em></p>
+  </div>
+
+  <script>
+    let countdown = 60;
+    const countdownElement = document.getElementById('countdown');
+    const revealElement = document.getElementById('reveal');
+    const alarm = document.getElementById('alarm');
+    const traceElement = document.getElementById('trace');
+
+    const traceLines = [
+      "[TRC] Initializing trace route...",
+      "[TRC] Accessing deep system logs...",
+      "[TRC] Bypassing VPN layers...",
+      "[TRC] Tracing device MAC address...",
+      "[TRC] Cross-referencing IP spoofing...",
+      "[TRC] Attempting geographic triangulation...",
+      "[TRC] Obfuscation detected. Breaking through...",
+      "[TRC] Locating device coordinates...",
+      "[TRC] Confirmed breach origin: Sector 7G...",
+      "[TRC] Identity Match: Yoshimitsu – Wulf Clan",
+      "[TRC] Trace terminated. Hacker cloaked."
+    ];
+
+    let traceIndex = 0;
+
+    function runTrace() {
+      if (traceIndex < traceLines.length) {
+        traceElement.textContent += traceLines[traceIndex] + "\n";
+        traceIndex++;
+        setTimeout(runTrace, 3000);
+      }
+    }
+
+    runTrace();
+
+    const interval = setInterval(() => {
+      countdown--;
+      countdownElement.textContent = countdown;
+      if (countdown <= 0) {
+        clearInterval(interval);
+        alarm.pause();
+        alarm.currentTime = 0;
+        document.querySelectorAll('.fake-popup, #countdown, .notification, #trace').forEach(el => el.style.display = 'none');
+        revealElement.style.display = 'block';
+      }
+    }, 1000);
+  </script>
+</body>
+</html>
